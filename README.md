@@ -7,7 +7,8 @@ Réplica funcional del sitio Nikitos con panel de administración. Este reposito
 - PHP `^7.3|^8.0` (compatible con Laravel 8 del `composer.json`)
 - Composer
 - Node.js y npm (assets con Laravel Mix)
-- Extensiones PHP habituales: `openssl`, `pdo`, `pdo_sqlite` (o `pdo_mysql` si usás MySQL), `mbstring`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`
+- Extensiones PHP habituales: `openssl`, `pdo`, `pdo_sqlite` (SQLite) o `pdo_mysql` (MySQL), `mbstring`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`
+- Subida de imágenes (Intervention): **`gd` o `imagick`** (`php -m | grep -i gd`)
 
 ## Instalación
 
@@ -19,9 +20,7 @@ php artisan key:generate
 touch database/database.sqlite
 ```
 
-Por defecto el proyecto usa **SQLite** (`DB_CONNECTION=sqlite` en `.env.example`). El archivo de base es `database/database.sqlite` (ignorado por Git). No hace falta MySQL para desarrollo.
-
-Si más adelante querés MySQL, en `.env` usá `DB_CONNECTION=mysql` y completá `DB_HOST`, `DB_DATABASE`, etc.
+Por defecto `.env.example` usa **SQLite** (`DB_CONNECTION=sqlite`). El archivo `database/database.sqlite` no se versiona (está en `.gitignore`).
 
 Migraciones y datos iniciales:
 
@@ -59,7 +58,8 @@ Cambiá la contraseña en entornos reales. Solo usuarios con `is_admin = true` p
 
 - `routes/web.php` — landing, login, logout, formulario de contacto (`POST /contacto`)
 - `routes/admin.php` — panel bajo prefijo `/admin` (middleware `auth` + `admin`)
-- `app/Http/Controllers/Admin/*` — controladores del dashboard (CRUD a completar)
+- `app/Http/Controllers/Admin/*` — panel (por ejemplo **CRUD de categorías** con imágenes optimizadas)
+- `app/Services/CategoryImageStorage.php` — guardado JPEG redimensionado (Intervention Image)
 - `app/Http/Middleware/EnsureUserIsAdmin.php` — restricción a administradores
 - `database/migrations/*` — usuarios, secciones, banners, categorías, productos, imágenes, recetas, mensajes de contacto
 
