@@ -7,7 +7,7 @@ Réplica funcional del sitio Nikitos con panel de administración. Este reposito
 - PHP `^7.3|^8.0` (compatible con Laravel 8 del `composer.json`)
 - Composer
 - Node.js y npm (assets con Laravel Mix)
-- Extensiones PHP habituales: `openssl`, `pdo`, `mbstring`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`
+- Extensiones PHP habituales: `openssl`, `pdo`, `pdo_sqlite` (o `pdo_mysql` si usás MySQL), `mbstring`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`
 
 ## Instalación
 
@@ -16,15 +16,12 @@ git clone <url-del-repo> && cd PruebaTecnica-Osole
 composer install
 cp .env.example .env
 php artisan key:generate
+touch database/database.sqlite
 ```
 
-Configurá la base de datos en `.env` (`DB_*`). Para desarrollo rápido podés usar SQLite:
+Por defecto el proyecto usa **SQLite** (`DB_CONNECTION=sqlite` en `.env.example`). El archivo de base es `database/database.sqlite` (ignorado por Git). No hace falta MySQL para desarrollo.
 
-```env
-DB_CONNECTION=sqlite
-# y comentá DB_HOST, etc.; creá el archivo:
-# touch database/database.sqlite
-```
+Si más adelante querés MySQL, en `.env` usá `DB_CONNECTION=mysql` y completá `DB_HOST`, `DB_DATABASE`, etc.
 
 Migraciones y datos iniciales:
 
@@ -68,4 +65,4 @@ Cambiá la contraseña en entornos reales. Solo usuarios con `is_admin = true` p
 
 ## Licencia
 
-MIT (framework Laravel y este proyecto salvo que indiques otra cosa).
+MIT (framework Laravel).
