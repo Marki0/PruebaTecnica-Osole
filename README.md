@@ -58,8 +58,10 @@ Cambiá la contraseña en entornos reales. Solo usuarios con `is_admin = true` p
 
 - `routes/web.php` — landing, login, logout, formulario de contacto (`POST /contacto`)
 - `routes/admin.php` — panel bajo prefijo `/admin` (middleware `auth` + `admin`)
-- `app/Http/Controllers/Admin/*` — panel (por ejemplo **CRUD de categorías** con imágenes optimizadas)
-- `app/Services/CategoryImageStorage.php` — guardado JPEG redimensionado (Intervention Image)
+- `app/Http/Controllers/Admin/*` — panel (CRUD **categorías** y **productos** con imagen principal + galería optimizada)
+- Maquetación pública según [prototipo Figma Nikitos](https://www.figma.com/proto/rMIU14zUYIY3Ci5A1bZYLy/Nikitos?page-id=0%3A1&node-id=2181-2957&viewport=431%2C389%2C0.02&t=Ak5PWNjAU2rrtwq1-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2181%3A2957) (pendiente en la landing)
+- `app/Services/CategoryImageStorage.php` — categorías (JPEG optimizado)
+- `app/Services/ProductImageStorage.php` — productos (misma optimización, carpeta `products/`)
 - `app/Http/Middleware/EnsureUserIsAdmin.php` — restricción a administradores
 - `database/migrations/*` — usuarios, secciones, banners, categorías, productos, imágenes, recetas, mensajes de contacto
 

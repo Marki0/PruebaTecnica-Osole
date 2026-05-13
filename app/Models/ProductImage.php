@@ -19,6 +19,7 @@ class ProductImage extends Model
 
     protected $casts = [
         'is_primary' => 'boolean',
+        'sort_order' => 'integer',
     ];
 
     public function product(): BelongsTo
