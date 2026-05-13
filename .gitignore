@@ -1,7 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
-/public/css
+/public/css/*
+!/public/css/nikitos-admin.css
 /public/js
 /public/mix-manifest.json
 /storage/*.key
