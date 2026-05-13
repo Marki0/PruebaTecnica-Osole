@@ -14,32 +14,13 @@
     <header class="nikitos-admin-header">
         <a href="{{ route('admin.dashboard') }}" class="nikitos-admin-logo">Nikitos <span>snacks</span></a>
 
-        <nav class="nikitos-admin-nav" aria-label="Principal">
+        <nav class="nikitos-admin-nav" aria-label="Panel">
+            <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}">Inicio</a>
+            <a href="{{ route('admin.site-sections.index') }}" class="{{ request()->routeIs('admin.site-sections.*') ? 'is-active' : '' }}">Textos</a>
+            <a href="{{ route('admin.banners.index') }}" class="{{ request()->routeIs('admin.banners.*') ? 'is-active' : '' }}">Banners</a>
+            <a href="{{ route('admin.categories.index') }}" class="{{ request()->routeIs('admin.categories.*') ? 'is-active' : '' }}">Categorías</a>
             <a href="{{ route('admin.products.index') }}" class="{{ request()->routeIs('admin.products.*') ? 'is-active' : '' }}">Productos</a>
-            <span class="nikitos-nav__soon" title="Próximamente">Histórico de pedido</span>
-            <span class="nikitos-nav__soon" title="Próximamente">Lista de precios</span>
-
-            @php
-                $contenidoActivo = request()->routeIs(
-                    'admin.dashboard',
-                    'admin.categories.*',
-                    'admin.banners.*',
-                    'admin.site-sections.*',
-                    'admin.recipes.*',
-                    'admin.contact-messages.*'
-                );
-            @endphp
-            <details class="nikitos-nav__more-wrap" @if ($contenidoActivo) open @endif>
-                <summary class="{{ $contenidoActivo ? 'is-parent-active' : '' }}">Contenido</summary>
-                <div class="nikitos-nav__dropdown">
-                    <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}">Inicio</a>
-                    <a href="{{ route('admin.categories.index') }}" class="{{ request()->routeIs('admin.categories.*') ? 'is-active' : '' }}">Categorías</a>
-                    <a href="{{ route('admin.banners.index') }}" class="{{ request()->routeIs('admin.banners.*') ? 'is-active' : '' }}">Banners</a>
-                    <a href="{{ route('admin.site-sections.index') }}" class="{{ request()->routeIs('admin.site-sections.*') ? 'is-active' : '' }}">Textos y secciones</a>
-                    <a href="{{ route('admin.recipes.index') }}" class="{{ request()->routeIs('admin.recipes.*') ? 'is-active' : '' }}">Recetas</a>
-                    <a href="{{ route('admin.contact-messages.index') }}" class="{{ request()->routeIs('admin.contact-messages.*') ? 'is-active' : '' }}">Mensajes de contacto</a>
-                </div>
-            </details>
+            <a href="{{ route('admin.contact-messages.index') }}" class="{{ request()->routeIs('admin.contact-messages.*') ? 'is-active' : '' }}">Contacto</a>
         </nav>
 
         <div class="nikitos-admin-user">

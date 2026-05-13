@@ -10,11 +10,19 @@ class ContactMessageController extends Controller
 {
     public function index(): View
     {
-        return view('admin.stub', ['title' => 'Mensajes de contacto']);
+        $messages = ContactMessage::query()
+            ->orderByDesc('created_at')
+            ->paginate(25);
+
+        return view('admin.contact-messages.index', compact('messages'));
     }
 
     public function show(ContactMessage $contact_message): View
     {
-        return view('admin.stub', ['title' => 'Mensaje #'.$contact_message->id]);
+        if ($contact_message->read_at === null) {
+            $contact_message->forceFill(['read_at' => now()])->save();
+        }
+
+        return view('admin.contact-messages.show', compact('contact_message'));
     }
 }
