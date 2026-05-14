@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Banner;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreBannerRequest extends FormRequest
 {
@@ -20,7 +22,13 @@ class StoreBannerRequest extends FormRequest
             'title' => ['nullable', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:500'],
             'link_url' => ['nullable', 'string', 'max:2048'],
-            'placement' => ['required', 'string', 'max:64'],
+            'placement' => [
+                'required',
+                'string',
+                'max:64',
+                Rule::in(Banner::sectionPlacementKeys()),
+                Rule::unique('banners', 'placement'),
+            ],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:65535'],
             'is_active' => ['sometimes', 'boolean'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],

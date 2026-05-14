@@ -1,8 +1,11 @@
+.DS_Store
+
 /node_modules
 /public/hot
+/public/nikitos
 /public/storage
 /public/css/*
-!/public/css/nikitos-admin.css
+!/public/css/site.css
 /public/js
 /public/mix-manifest.json
 /storage/*.key

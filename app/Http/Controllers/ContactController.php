@@ -12,6 +12,6 @@ class ContactController extends Controller
     {
         ContactMessage::create($request->validated());
 
-        return redirect()->route('home')->with('status', 'Gracias por contactarnos. Pronto nos comunicaremos.');
+        return redirect()->route('contacto')->with('status', 'Gracias por contactarnos. Pronto nos comunicaremos.');
     }
 }

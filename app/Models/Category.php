@@ -17,6 +17,7 @@ class Category extends Model
         'slug',
         'description',
         'image_path',
+        'accent_color',
         'sort_order',
     ];
 
@@ -27,6 +28,11 @@ class Category extends Model
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 
     /**

@@ -4,7 +4,9 @@
 
 @section('content')
     <div class="nikitos-auth-card">
-        <a href="{{ route('home') }}" class="nikitos-auth-logo">Nikitos <span>snacks</span></a>
+        <a href="{{ route('home') }}" class="nikitos-auth-logo" aria-label="Nikitos snacks">
+            <img src="{{ \App\Support\Landing::nk('image 177.png') }}" alt="Nikitos snacks" width="180" height="50" decoding="async">
+        </a>
         <h1>Panel administrador</h1>
         <p class="muted" style="margin:0 0 1.25rem;">Ingresá con tu cuenta de administración.</p>
 

@@ -37,6 +37,10 @@ class CategoryController extends Controller
         $data['slug'] = Category::uniqueSlug($slugSource);
 
         $data['sort_order'] = (int) $data['sort_order'];
+        $data['accent_color'] = isset($data['accent_color']) ? trim((string) $data['accent_color']) : null;
+        if ($data['accent_color'] === '') {
+            $data['accent_color'] = null;
+        }
 
         if ($request->hasFile('image')) {
             $data['image_path'] = $images->store($request->file('image'));
@@ -67,6 +71,10 @@ class CategoryController extends Controller
         $data['slug'] = Category::uniqueSlug($slugSource, $category->id);
 
         $data['sort_order'] = (int) $data['sort_order'];
+        $data['accent_color'] = isset($data['accent_color']) ? trim((string) $data['accent_color']) : null;
+        if ($data['accent_color'] === '') {
+            $data['accent_color'] = null;
+        }
 
         if ($request->boolean('remove_image')) {
             $images->delete($category->image_path);

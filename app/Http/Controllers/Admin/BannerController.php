@@ -8,24 +8,51 @@ use App\Http\Requests\Admin\UpdateBannerRequest;
 use App\Models\Banner;
 use App\Services\BannerImageStorage;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BannerController extends Controller
 {
     public function index(): View
     {
-        $banners = Banner::query()
-            ->orderBy('placement')
-            ->orderBy('sort_order')
-            ->orderBy('id')
-            ->paginate(20);
+        $bannersByPlacement = Banner::query()
+            ->whereIn('placement', Banner::sectionPlacementKeys())
+            ->get()
+            ->keyBy('placement');
 
-        return view('admin.banners.index', compact('banners'));
+        $slots = collect(Banner::sectionBannersDefinition())
+            ->map(function (string $label, string $placement) use ($bannersByPlacement) {
+                return [
+                    'placement' => $placement,
+                    'label' => $label,
+                    'banner' => $bannersByPlacement->get($placement),
+                ];
+            });
+
+        return view('admin.banners.index', compact('slots'));
     }
 
-    public function create(): View
+    public function create(Request $request): View|RedirectResponse
     {
-        return view('admin.banners.create');
+        $keys = Banner::sectionPlacementKeys();
+        $used = Banner::query()->whereIn('placement', $keys)->pluck('placement')->all();
+        $available = collect($keys)->diff($used)->values();
+
+        if ($available->isEmpty()) {
+            return redirect()
+                ->route('admin.banners.index')
+                ->with('status', 'Los cuatro banners de sección ya están creados. Editá cada uno para cambiar la imagen.');
+        }
+
+        $placement = $request->query('placement');
+        if (! is_string($placement) || ! $available->contains($placement)) {
+            $placement = $available->first();
+        }
+
+        return view('admin.banners.create', [
+            'presetPlacement' => $placement,
+            'availablePlacements' => $available,
+        ]);
     }
 
     public function store(StoreBannerRequest $request, BannerImageStorage $storage): RedirectResponse
@@ -70,11 +97,17 @@ class BannerController extends Controller
 
         $banner->update($data);
 
-        return redirect()->route('admin.banners.index')->with('status', 'Banner actualizado.');
+        return redirect()->route('admin.banners.index')->with('status', 'Banner actualizado. La imagen se refleja en la web si el banner está activo.');
     }
 
     public function destroy(Banner $banner, BannerImageStorage $storage): RedirectResponse
     {
+        if ($banner->isSectionHero()) {
+            return redirect()
+                ->route('admin.banners.index')
+                ->withErrors(['banner' => 'No se eliminan los banners de sección. Editá la imagen o desmarcá «Activo» si no querés mostrarla.']);
+        }
+
         $storage->delete($banner->image_path);
         $banner->delete();
 

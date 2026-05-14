@@ -29,6 +29,7 @@ class UpdateCategoryRequest extends FormRequest
             ],
             'description' => ['nullable', 'string', 'max:5000'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:65535'],
+            'accent_color' => ['nullable', 'string', 'max:32', 'regex:/^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'remove_image' => ['sometimes', 'boolean'],
         ];

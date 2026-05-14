@@ -1,0 +1,28 @@
+@import './nikitos-landing-legacy.css';
+@import './nikitos-admin-legacy.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply overflow-x-hidden scroll-smooth antialiased;
+    }
+
+    body.nikitos-landing {
+        @apply m-0 min-h-screen overflow-x-hidden bg-gray-bg font-sans text-base leading-relaxed text-ink;
+    }
+
+    body.nikitos-admin-body {
+        @apply m-0 min-h-screen flex flex-col bg-gray-bg font-sans text-base text-ink;
+    }
+
+    img {
+        @apply h-auto max-w-full align-middle;
+    }
+
+    a {
+        @apply text-inherit no-underline;
+    }
+}

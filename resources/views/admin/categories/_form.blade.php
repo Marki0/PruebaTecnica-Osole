@@ -25,6 +25,12 @@
 </div>
 
 <div>
+    <label for="accent_color">Color de acento (hex)</label>
+    <input id="accent_color" type="text" name="accent_color" value="{{ old('accent_color', $category->accent_color ?? '') }}" maxlength="32" placeholder="#f2a900">
+    <p class="muted" style="margin:0.25rem 0 0;">Opcional. Formato <code>#RGB</code> o <code>#RRGGBB</code>. Se usa en tarjetas y destacados.</p>
+</div>
+
+<div>
     <label for="image">Imagen</label>
     <input id="image" type="file" name="image" accept="image/jpeg,image/png,image/webp">
     <p class="muted" style="margin:0.25rem 0 0;">JPEG, PNG o WebP. Máx. 2 MB. Se optimiza al subir (ancho máx. 1200px).</p>

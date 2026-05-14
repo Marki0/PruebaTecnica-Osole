@@ -20,7 +20,6 @@ class UpdateBannerRequest extends FormRequest
             'title' => ['nullable', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:500'],
             'link_url' => ['nullable', 'string', 'max:2048'],
-            'placement' => ['required', 'string', 'max:64'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:65535'],
             'is_active' => ['sometimes', 'boolean'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],

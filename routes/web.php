@@ -6,6 +6,13 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/productos', [HomeController::class, 'productos'])->name('productos');
+Route::get('/productos/{category:slug}', [HomeController::class, 'productosCategory'])->name('productos.category');
+Route::get('/donde-comprar', [HomeController::class, 'dondeComprar'])->name('donde-comprar');
+Route::get('/recetas', [HomeController::class, 'recetas'])->name('recetas');
+Route::get('/recetas/{recipe:slug}', [HomeController::class, 'recipeShow'])->name('recetas.show');
+Route::get('/nosotros', [HomeController::class, 'nosotros'])->name('nosotros');
+Route::get('/contacto', [HomeController::class, 'contacto'])->name('contacto');
 
 Route::post('/contacto', [ContactController::class, 'store'])
     ->middleware('throttle:10,1')
