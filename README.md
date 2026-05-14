@@ -176,16 +176,9 @@ php artisan db:seed
 php artisan storage:link
 ```
 
-Si **no** tenés la carpeta **`public/nikitos/`** con los PNG en el clone, primero copiala desde tu máquina o bajala del repo (`git pull` después de que alguien haya hecho `git add public/nikitos` + `push`). El comando siguiente **solo** hace falta si usás **`Nikitos/` en la raíz** del proyecto en lugar de `public/nikitos/`:
-
-```bash
-php artisan nikitos:link-assets
-```
-
 - **`migrate`**: crea tablas según `database/migrations/`.
 - **`db:seed`**: usuario admin y datos demo; copia imágenes demo a `storage` leyendo desde **`public/nikitos/`**.
 - **`storage:link`**: enlace `public/storage` → `storage/app/public`.
-- **`nikitos:link-assets`**: crea enlace `public/nikitos` → `Nikitos/` en la **raíz** (flujo alternativo).
 
 ### 5. Assets front-end (CSS/JS con Mix)
 
