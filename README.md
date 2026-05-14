@@ -218,7 +218,7 @@ Los avisos *Deprecated* de `voku/portable-ascii` al ejecutar Artisan suelen apar
 - **`composer install` falla por “platform” / versión de PHP:** el lock está pensado para **PHP 8.2 a 8.4**. Corré `php -v` y, si hace falta, cambiá de versión (p. ej. Homebrew `php@8.2`) o `source bin/use-php-8.2.sh`. Para ver qué paquete bloquea una versión más vieja de PHP: `composer why-not php 8.1.0` (cambiá la versión de ejemplo).
 - **`Your requirements could not be resolved` al hacer `composer update`:** es distinto de `install`: mezcla versiones nuevas de paquetes; para reproducir la entrega, preferí **`composer install`** con PHP compatible.
 - **`SQLSTATE[HY000]` / no encuentra la base SQLite:** comprobá que exista `database/database.sqlite` y que `DB_CONNECTION=sqlite` en `.env`.
-- **Imágenes rotas en el sitio:** ejecutá `php artisan nikitos:link-assets` y `php artisan storage:link`; verificá que exista la carpeta `Nikitos/` en la raíz del proyecto.
+- **Imágenes rotas en el sitio:** ejecutá `php artisan nikitos:link-assets` y `php artisan storage:link`; En la raiz del proyecto la consola debe estar como ADMINISTRADOR verificá que exista la carpeta `Nikitos/` en la raíz del proyecto.
 - **Errores al subir archivos en el panel:** revisá permisos de escritura en `storage/` y `bootstrap/cache/`.
 - **Mix / `manifest.json` no encontrado:** corré `npm run dev` al menos una vez después de clonar.
 
