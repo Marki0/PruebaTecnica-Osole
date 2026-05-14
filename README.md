@@ -1,4 +1,4 @@
-# Nikitos — Prueba técnica (Laravel 8)
+# Nikitos — Prueba técnica (Laravel 8, PHP 8.2+)
 
 Réplica funcional del sitio **Nikitos** con **panel de administración** para gestionar contenido, imágenes y mensajes de contacto.
 
@@ -11,7 +11,7 @@ Réplica funcional del sitio **Nikitos** con **panel de administración** para g
 - **Assets de diseño:** carpeta `Nikitos/` (export Figma) y comando Artisan `nikitos:link-assets` para enlazar imágenes a `public/nikitos`.
 - **Front:** vistas Blade, estilos propios (`resources/css/site.css`, build con Laravel Mix + PostCSS/Tailwind según `package.json` / `webpack.mix.js`).
 
-Stack principal: **Laravel 8**, **SQLite** por defecto (configurable a MySQL), **Intervention Image** para optimización de JPEG en banners, categorías y productos.
+Stack principal: **Laravel 8** (`laravel/framework` ^8.75), **SQLite** por defecto (configurable a MySQL), **Intervention Image** para optimización de JPEG en banners, categorías y productos.
 
 ---
 
@@ -77,17 +77,43 @@ Referencia de diseño: [prototipo Figma Nikitos](https://www.figma.com/proto/rMI
 
 ## Requisitos
 
-- PHP `^7.3|^8.0` (compatible con Laravel 8 del `composer.json`)
-- Composer
-- Node.js y npm (assets con Laravel Mix)
-- Extensiones PHP habituales: `openssl`, `pdo`, `pdo_sqlite` (SQLite) o `pdo_mysql` (MySQL), `mbstring`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`
+### Versiones (importante)
+
+| Herramienta | Versión |
+|-------------|---------|
+| **PHP** | **8.2, 8.3 o 8.4** (recomendado **8.2.x** o **8.3.x** para este repo). **No** PHP 7.4 ni 8.0/8.1: el `composer.lock` actual trae dependencias (p. ej. `brick/math`) que exigen **PHP ≥ 8.2**. **PHP 8.5** suele funcionar, pero Laravel 8 muestra más *deprecated* en consola. |
+| **Composer** | **2.x** (`composer --version`) |
+| **Node.js** | **LTS 18+** (para `npm` y Laravel Mix) |
+
+Antes de instalar, comprobá la versión que usa la terminal (no la del IDE):
+
+```bash
+php -v
+# Debe indicar 8.2.x, 8.3.x o 8.4.x
+```
+
+En macOS con Homebrew, si `php -v` muestra 8.5 u otra mayor, podés priorizar 8.2 en esa sesión con `source bin/use-php-8.2.sh` (ver script en la raíz del repo).
+
+### Extensiones PHP
+
+- `openssl`, `pdo`, `pdo_sqlite` (SQLite) o `pdo_mysql` (MySQL), `mbstring`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`
 - Subida de imágenes (Intervention): **`gd` o `imagick`** (`php -m | grep -i gd`)
+
+### Nota sobre `composer.json` y `composer.lock`
+
+- En **`composer.json`** el requisito de PHP está alineado con lo que permite el **lock actual**: **`^8.2`** (PHP 8.2 hasta &lt; 9.0).
+- **`composer install`** respeta el lock: si Composer se queja de “platform”, casi siempre es porque la versión de PHP del sistema **no cumple** lo que piden los paquetes bloqueados. No es un fallo del código de la app, sino del entorno.
 
 ---
 
 ## Instalación (desarrollo local)
 
-Seguí los pasos en orden. Si algo falla, revisá la sección **Problemas frecuentes** más abajo.
+Seguí los pasos en orden. Si algo falla, revisá **Problemas frecuentes** más abajo.
+
+### 0. PHP y Composer
+
+1. Asegurate de tener **PHP 8.2+** activo en la misma terminal donde vas a correr Composer (`php -v`).
+2. Instalá dependencias **solo cuando** el punto anterior sea correcto.
 
 ### 1. Obtener el código e instalar dependencias PHP
 
@@ -97,7 +123,7 @@ cd PruebaTecnica-Osole
 composer install
 ```
 
-`composer install` descarga Laravel y paquetes (Intervention Image, Sanctum, etc.).
+`composer install` instala lo definido en **`composer.lock`** (Laravel 8, Intervention Image, Sanctum, etc.). No hace falta `composer update` para una primera instalación en condiciones normales.
 
 ### 2. Entorno y clave de aplicación
 
@@ -105,6 +131,8 @@ composer install
 cp .env.example .env
 php artisan key:generate
 ```
+
+El segundo comando **debe** ejecutarse con el mismo PHP con el que correrás la app (el del paso 0). Si falla, revisá que `composer install` haya terminado bien y que `vendor/` exista.
 
 Editá `.env` si querés cambiar `APP_NAME`, `APP_URL` (debe coincidir con la URL desde la que abrís el sitio, p. ej. `http://127.0.0.1:8000` al usar `php artisan serve`).
 
@@ -183,10 +211,12 @@ php artisan storage:link
 php artisan nikitos:link-assets
 ```
 
-Los avisos *Deprecated* de `voku/portable-ascii` al ejecutar Artisan suelen aparecer en PHP 8.2+ con Laravel 8; no impiden que los comandos terminen bien.
+Los avisos *Deprecated* de `voku/portable-ascii` al ejecutar Artisan suelen aparecer en **PHP 8.2+** con Laravel 8; en general **no** impiden que los comandos terminen bien.
 
 ### Problemas frecuentes
 
+- **`composer install` falla por “platform” / versión de PHP:** el lock está pensado para **PHP 8.2 a 8.4**. Corré `php -v` y, si hace falta, cambiá de versión (p. ej. Homebrew `php@8.2`) o `source bin/use-php-8.2.sh`. Para ver qué paquete bloquea una versión más vieja de PHP: `composer why-not php 8.1.0` (cambiá la versión de ejemplo).
+- **`Your requirements could not be resolved` al hacer `composer update`:** es distinto de `install`: mezcla versiones nuevas de paquetes; para reproducir la entrega, preferí **`composer install`** con PHP compatible.
 - **`SQLSTATE[HY000]` / no encuentra la base SQLite:** comprobá que exista `database/database.sqlite` y que `DB_CONNECTION=sqlite` en `.env`.
 - **Imágenes rotas en el sitio:** ejecutá `php artisan nikitos:link-assets` y `php artisan storage:link`; verificá que exista la carpeta `Nikitos/` en la raíz del proyecto.
 - **Errores al subir archivos en el panel:** revisá permisos de escritura en `storage/` y `bootstrap/cache/`.
