@@ -17,18 +17,20 @@
         </div>
     @endif
 
-    <section class="nk-receta-hero" aria-label="Recetas">
-        <div class="nk-receta-hero__media">
-            <img src="{{ \App\Support\Landing::nk('image (4).png') }}" alt="" loading="eager" width="1600" height="600">
-        </div>
-        <div class="nk-receta-hero__overlay" aria-hidden="true"></div>
-        <div class="nk-receta-hero__inner nk-wrap">
-            <h1 class="nk-receta-hero__title">Recetas</h1>
-        </div>
-    </section>
+    <div class="nk-receta-hero-stack nk-bleed-under-header">
+        <section class="nk-receta-hero" aria-label="Recetas">
+            <div class="nk-receta-hero__media">
+                <img src="{{ \App\Support\Landing::nk('image (4).png') }}" alt="" loading="eager" width="1600" height="600">
+            </div>
+            <div class="nk-receta-hero__overlay" aria-hidden="true"></div>
+            <div class="nk-receta-hero__inner nk-wrap">
+                <h1 class="nk-receta-hero__title">Recetas</h1>
+            </div>
+        </section>
 
-    <div class="nk-receta-hero-tear nk-receta-hero-tear--light" aria-hidden="true">
-        @include('partials.tear-vector4', ['tearSrc' => 'Vector-4.png', 'extraClass' => ''])
+        <div class="nk-receta-hero-tear nk-receta-hero-tear--light" aria-hidden="true">
+            @include('partials.tear-vector4', ['tearSrc' => 'Vector-4.png', 'extraClass' => ''])
+        </div>
     </div>
 
     <article class="nk-receta-detail">

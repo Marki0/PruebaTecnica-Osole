@@ -11,7 +11,7 @@
         </div>
     @endif
 
-    <div class="nk-home">
+    <div class="nk-home nk-bleed-under-header">
         <section class="nk-hero nk-hero--home" aria-label="Inicio">
             <div class="nk-hero__stage">
                 <div class="nk-hero__bg-wrap" aria-hidden="true">

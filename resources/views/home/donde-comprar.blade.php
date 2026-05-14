@@ -9,17 +9,19 @@
         </div>
     @endif
 
-    <section class="nk-donde-hero" aria-label="Donde comprar">
-        <div class="nk-donde-hero__media">
-            <img src="{{ \App\Support\Landing::sectionHeroImageUrl($heroBanner ?? null, \App\Models\Banner::PLACEMENT_SECTION_DONDE_COMPRAR) }}" alt="" loading="eager" width="1400" height="400">
-        </div>
-        <div class="nk-donde-hero__overlay" aria-hidden="true"></div>
-        <div class="nk-donde-hero__inner nk-wrap">
-            <h1 class="nk-donde-hero__title">Donde comprar</h1>
-        </div>
-    </section>
+    <div class="nk-donde-hero-stack nk-bleed-under-header">
+        <section class="nk-donde-hero" aria-label="Donde comprar">
+            <div class="nk-donde-hero__media">
+                <img src="{{ \App\Support\Landing::sectionHeroImageUrl($heroBanner ?? null, \App\Models\Banner::PLACEMENT_SECTION_DONDE_COMPRAR) }}" alt="" loading="eager" width="1400" height="400">
+            </div>
+            <div class="nk-donde-hero__overlay" aria-hidden="true"></div>
+            <div class="nk-donde-hero__inner nk-wrap">
+                <h1 class="nk-donde-hero__title">Donde comprar</h1>
+            </div>
+        </section>
 
-    <div class="nk-donde-sheet" aria-hidden="true"></div>
+        <div class="nk-donde-sheet" aria-hidden="true"></div>
+    </div>
 
     <section class="nk-donde-main" aria-label="Distribuidores y mapa">
         <div class="nk-wrap nk-donde-main__grid">

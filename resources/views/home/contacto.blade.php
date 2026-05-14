@@ -3,7 +3,7 @@
 @section('title', 'Contacto — Nikitos Snacks')
 
 @section('content')
-    <section class="nk-contacto nk-contacto--page" id="contacto">
+    <section class="nk-contacto nk-contacto--page nk-bleed-under-header" id="contacto">
         <div class="nk-wrap nk-contact-grid">
             <div>
                 <h1 class="nk-contacto__title">{{ optional($sectionContacto)->title ?? 'Contacto' }}</h1>

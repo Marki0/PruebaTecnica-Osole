@@ -94,12 +94,22 @@ body.nikitos-landing main#contenido-principal {
     padding-top: var(--nk-header-h);
 }
 
-body.nikitos-landing main#contenido-principal:has(> .nk-home) {
-    background-color: #0a0a0a;
+/* Primer bloque “a sangre” bajo el header isla (todas las vistas; opcional .nk-banner-warn antes) */
+main#contenido-principal > .nk-bleed-under-header:first-child,
+main#contenido-principal > .nk-banner-warn + .nk-bleed-under-header {
+    margin-top: calc(-1 * var(--nk-header-h));
 }
 
-main#contenido-principal > .nk-home:first-child {
-    margin-top: calc(-1 * var(--nk-header-h));
+/* Evita que el título del hero quede bajo la isla */
+.nk-bleed-under-header.nk-productos-hero .nk-productos-hero__inner,
+.nk-bleed-under-header .nk-donde-hero .nk-donde-hero__inner,
+.nk-bleed-under-header .nk-receta-hero .nk-receta-hero__inner,
+.nk-bleed-under-header.nk-nosotros-view .nk-nosotros-view__hero-inner {
+    padding-top: max(2rem, var(--nk-header-h));
+}
+
+.nk-contacto.nk-bleed-under-header.nk-contacto--page {
+    padding-top: max(1.75rem, calc(var(--nk-header-h) + 1rem));
 }
 
 .nk-logo {

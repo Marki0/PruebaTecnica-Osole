@@ -9,7 +9,7 @@
         </div>
     @endif
 
-    <div class="nk-nosotros-view">
+    <div class="nk-nosotros-view nk-bleed-under-header">
         <section class="nk-nosotros-view__hero" aria-label="Nosotros">
             <div class="nk-nosotros-view__hero-media">
                 <img src="{{ \App\Support\Landing::sectionHeroImageUrl($heroBanner ?? null, \App\Models\Banner::PLACEMENT_SECTION_NOSOTROS) }}" alt="" loading="eager" width="1400" height="480">
