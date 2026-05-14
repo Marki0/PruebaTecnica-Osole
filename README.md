@@ -145,7 +145,7 @@ Variables opcionales documentadas en `.env.example`: `HOME_HERO_BACKGROUND_URL`,
 Por defecto `.env.example` trae `DB_CONNECTION=sqlite`. Creá el archivo de base de datos:
 
 ```bash
-touch database/database.sqlite
+database/database.sqlite
 ```
 
 No hace falta definir `DB_DATABASE` salvo que quieras otra ruta absoluta al `.sqlite`.
