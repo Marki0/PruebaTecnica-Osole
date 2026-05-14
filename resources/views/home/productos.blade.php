@@ -65,6 +65,7 @@
                 <div class="nk-productos-category-main">
                     <div class="nk-productos-category-toolbar">
                         <a href="{{ asset(config('nikitos_home.catalog_pdf')) }}" download="{{ config('nikitos_home.catalog_download_filename') }}" class="nk-catalogo-download">Descargar catálogo</a>
+                        <a href="{{ route('contacto') }}" class="nk-catalogo-download">Consultar</a>
                     </div>
 
                     @if ($category->products->isEmpty())
