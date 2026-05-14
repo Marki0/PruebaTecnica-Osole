@@ -5,7 +5,7 @@
 @section('content')
     @if (! $nikitosPublicLinked)
         <div class="nk-banner-warn nk-wrap" style="margin-top:0.5rem;">
-            <p>Ejecutá <code>php artisan nikitos:link-assets</code> para ver imágenes de la carpeta Nikitos.</p>
+            <p>Los PNG del mockup van en <code>public/nikitos/</code> (minúsculas) y tienen que estar en el repositorio.</p>
         </div>
     @endif
 

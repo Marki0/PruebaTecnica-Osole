@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Storage;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Copia un archivo desde Nikitos/ hacia storage/app/public si existe.
+     * Copia un archivo desde public/nikitos/ hacia storage/app/public si existe.
      */
     protected function copyNikitosToStorage(string $sourceName, string $destPath): bool
     {
-        $src = base_path('Nikitos/'.$sourceName);
+        $src = public_path('nikitos/'.$sourceName);
         if (! is_readable($src)) {
             return false;
         }
@@ -90,9 +90,8 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        $nikitos = base_path('Nikitos');
-        if (! is_dir($nikitos)) {
-            return;
+        if (! is_dir(public_path('nikitos')) && $this->command) {
+            $this->command->warn('No existe public/nikitos/: el seed no copiará imágenes demo a storage. Creá la carpeta con los PNG y volvé a ejecutar db:seed si las necesitás.');
         }
 
         $sectionHeroes = [

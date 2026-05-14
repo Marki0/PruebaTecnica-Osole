@@ -6,7 +6,7 @@
     @if (! $nikitosPublicLinked && ! $heroBackgroundImage)
         <div class="nk-banner-warn nk-wrap">
             <p>
-                Ejecutá <code>php artisan nikitos:link-assets</code> para enlazar <strong>Nikitos/</strong> (incluye <code>hero-fondo.png</code> y <code>Group 3793.png</code>).
+                Falta la carpeta <code>public/nikitos/</code> (minúsculas) con los PNG del diseño, o no está en el clone: subila al repo con <code>git add public/nikitos</code> y <code>git push</code>.
             </p>
         </div>
     @endif

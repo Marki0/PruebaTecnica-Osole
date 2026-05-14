@@ -43,7 +43,7 @@
                 </div>
             @endif
             <div>
-                <label for="nikitos_image">Imagen Nikitos (archivo en carpeta <code>public/nikitos/</code>)</label>
+                <label for="nikitos_image">Imagen Nikitos (archivo en <code>public/nikitos/</code>)</label>
                 <input id="nikitos_image" type="text" name="nikitos_image" value="{{ old('nikitos_image', $extra['nikitos_image'] ?? '') }}" maxlength="255" placeholder="ej. Group 3798.png">
                 <p class="muted" style="margin:0.25rem 0 0;">Solo aplica si no hay imagen subida. Si lo dejás vacío, se usa la imagen por defecto de este bloque.</p>
             </div>

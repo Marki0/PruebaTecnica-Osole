@@ -2,7 +2,7 @@
 
 /node_modules
 /public/hot
-/public/nikitos
+# public/nikitos/ NO va en .gitignore: los PNG del mockup se versionan en public/nikitos/ (minúsculas).
 /public/storage
 /public/css/*
 !/public/css/site.css
